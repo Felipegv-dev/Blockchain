@@ -1,0 +1,21 @@
+# Entorno virtual
+.venv/
+venv/
+env/
+
+# Cachés de Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Estado de la simulación (se genera en tiempo de ejecución)
+blockchain_state.json
+*.bak
+
+# Configuración local de herramientas / secrets
+.claude/
+.streamlit/secrets.toml
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
