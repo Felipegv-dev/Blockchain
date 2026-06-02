@@ -193,6 +193,18 @@ def test_load_valida_estado_manipulado():
         print("OK E — load rechaza estado manipulado:", e)
 
 
+def test_no_autoenvio():
+    """UX: no se puede crear una transacción a la propia dirección del remitente."""
+    bc = Blockchain.create(difficulty=2)
+    f = bc.wallets[bc.founder_address]
+    try:
+        bc.create_transaction(f, f.address, 10, fee=0)
+        assert False, "debería rechazar el auto-envío"
+    except ValueError as e:
+        assert "ti mismo" in str(e), f"mensaje inesperado: {e}"
+        print("OK — auto-envío rechazado:", e)
+
+
 def test_roundtrip_valido():
     """E: un estado legítimo se guarda y carga correctamente (con validación)."""
     bc, f, a = base_chain()
@@ -217,6 +229,7 @@ if __name__ == "__main__":
         test_conservacion_fraccionaria,
         test_inflacion_rechazada,
         test_load_valida_estado_manipulado,
+        test_no_autoenvio,
         test_roundtrip_valido,
     ]:
         fn()

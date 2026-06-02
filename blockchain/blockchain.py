@@ -35,6 +35,7 @@ from .transaction import (
 from .wallet import Wallet, address_from_public_key_hex, verify_signature
 
 # --------------------------- Parámetros del proyecto --------------------------- #
+COIN_NAME = "DoggyCoin"   # nombre de la moneda
 GENESIS_SUPPLY = 1000.0   # monedas iniciales (premine) del bloque génesis
 BLOCK_REWARD = 3.0        # recompensa fija por bloque minado
 DEFAULT_DIFFICULTY = 3    # ceros iniciales exigidos por la PoW
@@ -158,6 +159,8 @@ class Blockchain:
             raise ValueError("La cantidad a enviar debe ser positiva.")
         if fee < 0:
             raise ValueError("La comisión no puede ser negativa.")
+        if recipient_address == sender.address:
+            raise ValueError("No puedes enviarte dinero a ti mismo; elige otro destinatario.")
 
         need = round_amount(amount + fee)
         available = self._spendable_utxos(sender.address, self._mempool_view())

@@ -16,9 +16,11 @@ import pandas as pd
 import streamlit as st
 
 from blockchain import Blockchain
-from blockchain.blockchain import BLOCK_REWARD, DEFAULT_DIFFICULTY, GENESIS_SUPPLY
+from blockchain.blockchain import BLOCK_REWARD, COIN_NAME, DEFAULT_DIFFICULTY, GENESIS_SUPPLY
 
-st.set_page_config(page_title="Mini Blockchain", page_icon="⛓️", layout="wide")
+AUTHORS = "Felipe Garcia · Rodrigo Lira · Diego Lara"
+
+st.set_page_config(page_title=COIN_NAME, page_icon="🐶", layout="wide")
 
 
 # --------------------------------------------------------------------------- #
@@ -55,8 +57,9 @@ def short(text: str, n: int = 14) -> str:
 # --------------------------------------------------------------------------- #
 bc = get_chain()
 
-st.sidebar.title("⛓️ Mini Blockchain")
+st.sidebar.title(f"🐶 {COIN_NAME}")
 st.sidebar.caption("Proyecto Integrador · ECDSA · UTXO · PoW")
+st.sidebar.caption(f"👥 Autores: {AUTHORS}")
 
 section = st.sidebar.radio(
     "Navegación",
@@ -150,8 +153,8 @@ def render_inicio(bc: Blockchain) -> None:
         st.error(f"❌ Cadena inválida: {msg}")
 
     st.caption(
-        "Regla económica: el génesis crea 1000 monedas (premine). "
-        "Cada bloque nuevo crea 3 monedas de recompensa; las comisiones no crean "
+        f"Regla económica: el génesis crea 1000 {COIN_NAME} (premine). "
+        f"Cada bloque nuevo crea 3 {COIN_NAME} de recompensa; las comisiones no crean "
         "dinero, sólo pasan del remitente al minero. "
         f"Supply esperado = 1000 + 3 × (bloques − 1) = "
         f"{GENESIS_SUPPLY + BLOCK_REWARD * (n_blocks - 1):g}."
@@ -275,7 +278,7 @@ def render_mineria(bc: Blockchain) -> None:
     st.info(
         f"Recompensa al minar = **{BLOCK_REWARD:g}** + comisiones pendientes "
         f"(**{sum(tx.fee for tx in bc.mempool):g}**) "
-        f"= **{BLOCK_REWARD + sum(tx.fee for tx in bc.mempool):g}** monedas. "
+        f"= **{BLOCK_REWARD + sum(tx.fee for tx in bc.mempool):g}** {COIN_NAME}. "
         f"Transacciones que se incluirán: {len(bc.mempool)}."
     )
 

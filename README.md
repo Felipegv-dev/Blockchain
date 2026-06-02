@@ -1,9 +1,11 @@
-# Proyecto Integrador — Mini Blockchain
+# 🐶 DoggyCoin — Proyecto Integrador
 
-Mini-criptomoneda educativa que integra los conceptos del proyecto:
-**wallets con ECDSA (secp256k1)**, **modelo UTXO**, **firmas digitales**,
-**bloques encadenados**, **bloque génesis con premine**, **minería con Prueba
-de Trabajo (PoW)** y una **interfaz interactiva en Streamlit**.
+**DoggyCoin** es una mini-criptomoneda educativa que integra los conceptos del
+proyecto: **wallets con ECDSA (secp256k1)**, **modelo UTXO**, **firmas
+digitales**, **bloques encadenados**, **bloque génesis con premine**, **minería
+con Prueba de Trabajo (PoW)** y una **interfaz interactiva en Streamlit**.
+
+**Autores:** Felipe Garcia · Rodrigo Lira · Diego Lara
 
 ## Módulos
 
